@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-nginx-on-k8s
+  namespace: nginx-on-k8s
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: app-nginx-on-k8s
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: app-nginx-on-k8s
+    spec:
+      containers:
+      - image: 911140678545.dkr.ecr.eu-west-1.amazonaws.com/avm-k8s-testmf:latest
+        imagePullPolicy: Always
+        name: app-nginx-on-k8s
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "1"
